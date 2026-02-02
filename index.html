@@ -1,0 +1,687 @@
+<!doctype html>
+<html lang="en" class="h-full">
+ <head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Developer Portfolio</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script src="/_sdk/element_sdk.js"></script>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600;700&amp;family=Inter:wght@300;400;500;600&amp;display=swap" rel="stylesheet">
+  <style>
+    body {
+      box-sizing: border-box;
+    }
+    
+    * {
+      scrollbar-width: thin;
+      scrollbar-color: #00ffa3 #0a0a0f;
+    }
+    
+    *::-webkit-scrollbar {
+      width: 6px;
+    }
+    
+    *::-webkit-scrollbar-track {
+      background: #0a0a0f;
+    }
+    
+    *::-webkit-scrollbar-thumb {
+      background: #00ffa3;
+      border-radius: 3px;
+    }
+    
+    .font-mono-code {
+      font-family: 'JetBrains Mono', monospace;
+    }
+    
+    .font-body {
+      font-family: 'Inter', sans-serif;
+    }
+    
+    @keyframes float {
+      0%, 100% { transform: translateY(0px); }
+      50% { transform: translateY(-10px); }
+    }
+    
+    @keyframes pulse-glow {
+      0%, 100% { box-shadow: 0 0 20px rgba(0, 255, 163, 0.3); }
+      50% { box-shadow: 0 0 40px rgba(0, 255, 163, 0.6); }
+    }
+    
+    @keyframes typing {
+      from { width: 0; }
+      to { width: 100%; }
+    }
+    
+    @keyframes blink {
+      0%, 50% { border-color: transparent; }
+      51%, 100% { border-color: #00ffa3; }
+    }
+    
+    .typing-effect {
+      overflow: hidden;
+      white-space: nowrap;
+      border-right: 3px solid #00ffa3;
+      animation: typing 2s steps(30) forwards, blink 1s infinite;
+    }
+    
+    .float-animation {
+      animation: float 6s ease-in-out infinite;
+    }
+    
+    .glow-animation {
+      animation: pulse-glow 3s ease-in-out infinite;
+    }
+    
+    .fade-in {
+      opacity: 0;
+      transform: translateY(30px);
+      transition: opacity 0.6s ease, transform 0.6s ease;
+    }
+    
+    .fade-in.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+    
+    .skill-bar {
+      transition: width 1s ease-out;
+    }
+    
+    .card-hover {
+      transition: all 0.3s ease;
+    }
+    
+    .card-hover:hover {
+      transform: translateY(-8px);
+      box-shadow: 0 20px 40px rgba(0, 255, 163, 0.15);
+    }
+    
+    .timeline-line {
+      background: linear-gradient(180deg, #00ffa3 0%, #0a0a0f 100%);
+    }
+    
+    .code-block {
+      position: relative;
+    }
+    
+    .code-block::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: 30px;
+      background: linear-gradient(90deg, #ff5f57, #febc2e, #28c840);
+      background-size: 12px 12px;
+      background-position: 12px center;
+      background-repeat: no-repeat;
+      border-radius: 8px 8px 0 0;
+    }
+    
+    .code-block::after {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 24px;
+      width: 12px;
+      height: 30px;
+      background: radial-gradient(circle, #febc2e 5px, transparent 5px);
+      background-position: center;
+    }
+    
+    .nav-link {
+      position: relative;
+    }
+    
+    .nav-link::after {
+      content: '';
+      position: absolute;
+      bottom: -4px;
+      left: 0;
+      width: 0;
+      height: 2px;
+      background: #00ffa3;
+      transition: width 0.3s ease;
+    }
+    
+    .nav-link:hover::after {
+      width: 100%;
+    }
+  </style>
+  <style>@view-transition { navigation: auto; }</style>
+  <script src="/_sdk/data_sdk.js" type="text/javascript"></script>
+ </head>
+ <body class="h-full font-body">
+  <div id="app-wrapper" class="h-full w-full overflow-auto" style="background: #0a0a0f;"><!-- Navigation -->
+   <nav class="fixed top-0 left-0 right-0 z-50 backdrop-blur-md bg-opacity-80" style="background: rgba(10, 10, 15, 0.9); border-bottom: 1px solid rgba(0, 255, 163, 0.1);">
+    <div class="max-w-6xl mx-auto px-6 py-4 flex justify-between items-center"><a href="#hero" class="font-mono-code text-xl font-bold" style="color: #00ffa3;"> &lt;dev/&gt; </a>
+     <div class="hidden md:flex gap-8"><a href="#skills" class="nav-link text-sm" style="color: #a0a0b0;">Skills</a> <a href="#projects" class="nav-link text-sm" style="color: #a0a0b0;">Projects</a> <a href="#experience" class="nav-link text-sm" style="color: #a0a0b0;">Experience</a> <a href="#contact" class="nav-link text-sm" style="color: #a0a0b0;">Contact</a>
+     </div><a href="https://github.com" target="_blank" rel="noopener noreferrer" class="flex items-center gap-2 px-4 py-2 rounded-lg transition-all hover:scale-105" style="background: rgba(0, 255, 163, 0.1); border: 1px solid rgba(0, 255, 163, 0.3);">
+      <svg class="w-5 h-5" fill="#00ffa3" viewbox="0 0 24 24">
+       <path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z" />
+      </svg><span class="text-sm font-medium" style="color: #00ffa3;">GitHub</span> </a>
+    </div>
+   </nav><!-- Hero Section -->
+   <section id="hero" class="min-h-screen flex items-center justify-center px-6 pt-20">
+    <div class="max-w-6xl mx-auto grid md:grid-cols-2 gap-12 items-center">
+     <div class="fade-in">
+      <p class="font-mono-code text-sm mb-4" style="color: #00ffa3;">// Hello, World!</p>
+      <h1 id="hero-name" class="font-mono-code text-4xl md:text-5xl font-bold mb-4" style="color: #f0f0f5;">Alex Chen</h1>
+      <h2 id="hero-title" class="font-mono-code text-xl md:text-2xl mb-6" style="color: #00ffa3;">Full Stack Developer</h2>
+      <p id="hero-bio" class="text-lg leading-relaxed mb-8" style="color: #a0a0b0;">Crafting elegant solutions with clean code. Passionate about building performant web applications and exploring new technologies. I turn complex problems into simple, beautiful interfaces.</p>
+      <div class="flex flex-wrap gap-3 mb-8"><span class="px-3 py-1 rounded-full text-xs font-mono-code" style="background: rgba(0, 255, 163, 0.1); color: #00ffa3; border: 1px solid rgba(0, 255, 163, 0.3);">React</span> <span class="px-3 py-1 rounded-full text-xs font-mono-code" style="background: rgba(0, 255, 163, 0.1); color: #00ffa3; border: 1px solid rgba(0, 255, 163, 0.3);">TypeScript</span> <span class="px-3 py-1 rounded-full text-xs font-mono-code" style="background: rgba(0, 255, 163, 0.1); color: #00ffa3; border: 1px solid rgba(0, 255, 163, 0.3);">Node.js</span> <span class="px-3 py-1 rounded-full text-xs font-mono-code" style="background: rgba(0, 255, 163, 0.1); color: #00ffa3; border: 1px solid rgba(0, 255, 163, 0.3);">Python</span> <span class="px-3 py-1 rounded-full text-xs font-mono-code" style="background: rgba(0, 255, 163, 0.1); color: #00ffa3; border: 1px solid rgba(0, 255, 163, 0.3);">PostgreSQL</span>
+      </div>
+      <div class="flex gap-4"><a href="#contact" class="px-6 py-3 rounded-lg font-medium transition-all hover:scale-105 glow-animation" style="background: #00ffa3; color: #0a0a0f;"> Get In Touch </a> <a href="#projects" class="px-6 py-3 rounded-lg font-medium transition-all hover:scale-105" style="background: transparent; color: #00ffa3; border: 1px solid #00ffa3;"> View Work </a>
+      </div>
+     </div>
+     <div class="fade-in float-animation">
+      <div class="code-block rounded-lg p-6 pt-12" style="background: #12121a; border: 1px solid rgba(0, 255, 163, 0.2);">
+       <pre class="font-mono-code text-sm overflow-x-auto"><code style="color: #a0a0b0;"><span style="color: #c792ea;">const</span> <span style="color: #82aaff;">developer</span> = {
+  <span style="color: #f78c6c;">name</span>: <span style="color: #c3e88d;">"Alex Chen"</span>,
+  <span style="color: #f78c6c;">role</span>: <span style="color: #c3e88d;">"Full Stack Dev"</span>,
+  <span style="color: #f78c6c;">skills</span>: [
+    <span style="color: #c3e88d;">"JavaScript"</span>,
+    <span style="color: #c3e88d;">"React"</span>,
+    <span style="color: #c3e88d;">"Node.js"</span>
+  ],
+  <span style="color: #82aaff;">code</span>: () =&gt; <span style="color: #c3e88d;">"☕ + 💻"</span>,
+  <span style="color: #82aaff;">passion</span>: <span style="color: #ff9cac;">true</span>
+};</code></pre>
+      </div>
+     </div>
+    </div>
+   </section><!-- Skills Section -->
+   <section id="skills" class="py-24 px-6">
+    <div class="max-w-6xl mx-auto">
+     <div class="text-center mb-16 fade-in">
+      <p class="font-mono-code text-sm mb-2" style="color: #00ffa3;">// My Expertise</p>
+      <h2 class="font-mono-code text-3xl md:text-4xl font-bold" style="color: #f0f0f5;">Technical Skills</h2>
+     </div>
+     <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-6"><!-- Frontend -->
+      <div class="fade-in card-hover p-6 rounded-xl" style="background: #12121a; border: 1px solid rgba(0, 255, 163, 0.1);">
+       <div class="flex items-center gap-3 mb-6">
+        <div class="w-12 h-12 rounded-lg flex items-center justify-center" style="background: rgba(0, 255, 163, 0.1);">
+         <svg class="w-6 h-6" fill="#00ffa3" viewbox="0 0 24 24">
+          <path d="M12 2L2 7v10l10 5 10-5V7L12 2zm0 2.5L19 8l-7 3.5L5 8l7-3.5zM4 9.5l7 3.5v6.5l-7-3.5V9.5zm9 10v-6.5l7-3.5v6.5l-7 3.5z" />
+         </svg>
+        </div>
+        <h3 class="font-mono-code text-lg font-semibold" style="color: #f0f0f5;">Frontend</h3>
+       </div>
+       <div class="space-y-4">
+        <div>
+         <div class="flex justify-between mb-1"><span class="text-sm" style="color: #a0a0b0;">React / Next.js</span> <span class="text-sm font-mono-code" style="color: #00ffa3;">95%</span>
+         </div>
+         <div class="h-2 rounded-full" style="background: rgba(0, 255, 163, 0.1);">
+          <div class="skill-bar h-full rounded-full" style="width: 95%; background: linear-gradient(90deg, #00ffa3, #00d4aa);"></div>
+         </div>
+        </div>
+        <div>
+         <div class="flex justify-between mb-1"><span class="text-sm" style="color: #a0a0b0;">TypeScript</span> <span class="text-sm font-mono-code" style="color: #00ffa3;">90%</span>
+         </div>
+         <div class="h-2 rounded-full" style="background: rgba(0, 255, 163, 0.1);">
+          <div class="skill-bar h-full rounded-full" style="width: 90%; background: linear-gradient(90deg, #00ffa3, #00d4aa);"></div>
+         </div>
+        </div>
+        <div>
+         <div class="flex justify-between mb-1"><span class="text-sm" style="color: #a0a0b0;">Tailwind CSS</span> <span class="text-sm font-mono-code" style="color: #00ffa3;">92%</span>
+         </div>
+         <div class="h-2 rounded-full" style="background: rgba(0, 255, 163, 0.1);">
+          <div class="skill-bar h-full rounded-full" style="width: 92%; background: linear-gradient(90deg, #00ffa3, #00d4aa);"></div>
+         </div>
+        </div>
+       </div>
+      </div><!-- Backend -->
+      <div class="fade-in card-hover p-6 rounded-xl" style="background: #12121a; border: 1px solid rgba(0, 255, 163, 0.1);">
+       <div class="flex items-center gap-3 mb-6">
+        <div class="w-12 h-12 rounded-lg flex items-center justify-center" style="background: rgba(0, 255, 163, 0.1);">
+         <svg class="w-6 h-6" fill="#00ffa3" viewbox="0 0 24 24">
+          <path d="M4 1h16a1 1 0 0 1 1 1v4a1 1 0 0 1-1 1H4a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1m0 8h16a1 1 0 0 1 1 1v4a1 1 0 0 1-1 1H4a1 1 0 0 1-1-1v-4a1 1 0 0 1 1-1m0 8h16a1 1 0 0 1 1 1v4a1 1 0 0 1-1 1H4a1 1 0 0 1-1-1v-4a1 1 0 0 1 1-1M9 5h1V3H9v2m0 8h1v-2H9v2m0 8h1v-2H9v2M5 3v2h2V3H5m0 8v2h2v-2H5m0 8v2h2v-2H5z" />
+         </svg>
+        </div>
+        <h3 class="font-mono-code text-lg font-semibold" style="color: #f0f0f5;">Backend</h3>
+       </div>
+       <div class="space-y-4">
+        <div>
+         <div class="flex justify-between mb-1"><span class="text-sm" style="color: #a0a0b0;">Node.js / Express</span> <span class="text-sm font-mono-code" style="color: #00ffa3;">88%</span>
+         </div>
+         <div class="h-2 rounded-full" style="background: rgba(0, 255, 163, 0.1);">
+          <div class="skill-bar h-full rounded-full" style="width: 88%; background: linear-gradient(90deg, #00ffa3, #00d4aa);"></div>
+         </div>
+        </div>
+        <div>
+         <div class="flex justify-between mb-1"><span class="text-sm" style="color: #a0a0b0;">Python / Django</span> <span class="text-sm font-mono-code" style="color: #00ffa3;">85%</span>
+         </div>
+         <div class="h-2 rounded-full" style="background: rgba(0, 255, 163, 0.1);">
+          <div class="skill-bar h-full rounded-full" style="width: 85%; background: linear-gradient(90deg, #00ffa3, #00d4aa);"></div>
+         </div>
+        </div>
+        <div>
+         <div class="flex justify-between mb-1"><span class="text-sm" style="color: #a0a0b0;">PostgreSQL / MongoDB</span> <span class="text-sm font-mono-code" style="color: #00ffa3;">82%</span>
+         </div>
+         <div class="h-2 rounded-full" style="background: rgba(0, 255, 163, 0.1);">
+          <div class="skill-bar h-full rounded-full" style="width: 82%; background: linear-gradient(90deg, #00ffa3, #00d4aa);"></div>
+         </div>
+        </div>
+       </div>
+      </div><!-- DevOps -->
+      <div class="fade-in card-hover p-6 rounded-xl" style="background: #12121a; border: 1px solid rgba(0, 255, 163, 0.1);">
+       <div class="flex items-center gap-3 mb-6">
+        <div class="w-12 h-12 rounded-lg flex items-center justify-center" style="background: rgba(0, 255, 163, 0.1);">
+         <svg class="w-6 h-6" fill="#00ffa3" viewbox="0 0 24 24">
+          <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z" />
+         </svg>
+        </div>
+        <h3 class="font-mono-code text-lg font-semibold" style="color: #f0f0f5;">DevOps &amp; Tools</h3>
+       </div>
+       <div class="space-y-4">
+        <div>
+         <div class="flex justify-between mb-1"><span class="text-sm" style="color: #a0a0b0;">Docker / K8s</span> <span class="text-sm font-mono-code" style="color: #00ffa3;">78%</span>
+         </div>
+         <div class="h-2 rounded-full" style="background: rgba(0, 255, 163, 0.1);">
+          <div class="skill-bar h-full rounded-full" style="width: 78%; background: linear-gradient(90deg, #00ffa3, #00d4aa);"></div>
+         </div>
+        </div>
+        <div>
+         <div class="flex justify-between mb-1"><span class="text-sm" style="color: #a0a0b0;">AWS / GCP</span> <span class="text-sm font-mono-code" style="color: #00ffa3;">75%</span>
+         </div>
+         <div class="h-2 rounded-full" style="background: rgba(0, 255, 163, 0.1);">
+          <div class="skill-bar h-full rounded-full" style="width: 75%; background: linear-gradient(90deg, #00ffa3, #00d4aa);"></div>
+         </div>
+        </div>
+        <div>
+         <div class="flex justify-between mb-1"><span class="text-sm" style="color: #a0a0b0;">CI/CD Pipelines</span> <span class="text-sm font-mono-code" style="color: #00ffa3;">80%</span>
+         </div>
+         <div class="h-2 rounded-full" style="background: rgba(0, 255, 163, 0.1);">
+          <div class="skill-bar h-full rounded-full" style="width: 80%; background: linear-gradient(90deg, #00ffa3, #00d4aa);"></div>
+         </div>
+        </div>
+       </div>
+      </div>
+     </div>
+    </div>
+   </section><!-- Projects Section -->
+   <section id="projects" class="py-24 px-6" style="background: linear-gradient(180deg, #0a0a0f 0%, #0f0f18 50%, #0a0a0f 100%);">
+    <div class="max-w-6xl mx-auto">
+     <div class="text-center mb-16 fade-in">
+      <p class="font-mono-code text-sm mb-2" style="color: #00ffa3;">// Portfolio</p>
+      <h2 id="projects-title" class="font-mono-code text-3xl md:text-4xl font-bold" style="color: #f0f0f5;">Featured Projects</h2>
+     </div>
+     <div class="grid md:grid-cols-2 gap-8"><!-- Project 1 -->
+      <div class="fade-in card-hover rounded-xl overflow-hidden" style="background: #12121a; border: 1px solid rgba(0, 255, 163, 0.1);">
+       <div class="h-48 flex items-center justify-center" style="background: linear-gradient(135deg, #1a1a2e 0%, #16213e 100%);">
+        <div class="text-6xl">
+         🚀
+        </div>
+       </div>
+       <div class="p-6">
+        <div class="flex items-center gap-2 mb-3"><span class="px-2 py-1 rounded text-xs font-mono-code" style="background: rgba(0, 255, 163, 0.1); color: #00ffa3;">Featured</span> <span class="px-2 py-1 rounded text-xs font-mono-code" style="background: rgba(130, 170, 255, 0.1); color: #82aaff;">Open Source</span>
+        </div>
+        <h3 class="font-mono-code text-xl font-semibold mb-2" style="color: #f0f0f5;">DevFlow</h3>
+        <p class="text-sm mb-4" style="color: #a0a0b0;">A real-time collaboration platform for developers with integrated code editor, video calls, and project management tools.</p>
+        <div class="flex flex-wrap gap-2 mb-4"><span class="px-2 py-1 rounded text-xs" style="background: #1a1a2e; color: #a0a0b0;">React</span> <span class="px-2 py-1 rounded text-xs" style="background: #1a1a2e; color: #a0a0b0;">WebRTC</span> <span class="px-2 py-1 rounded text-xs" style="background: #1a1a2e; color: #a0a0b0;">Socket.io</span> <span class="px-2 py-1 rounded text-xs" style="background: #1a1a2e; color: #a0a0b0;">MongoDB</span>
+        </div>
+        <div class="flex gap-4"><a href="#" class="flex items-center gap-2 text-sm transition-colors hover:opacity-80" style="color: #00ffa3;">
+          <svg class="w-4 h-4" fill="currentColor" viewbox="0 0 24 24">
+           <path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z" />
+          </svg> Code </a> <a href="#" class="flex items-center gap-2 text-sm transition-colors hover:opacity-80" style="color: #82aaff;">
+          <svg class="w-4 h-4" fill="none" stroke="currentColor" viewbox="0 0 24 24">
+           <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14" />
+          </svg> Demo </a>
+        </div>
+       </div>
+      </div><!-- Project 2 -->
+      <div class="fade-in card-hover rounded-xl overflow-hidden" style="background: #12121a; border: 1px solid rgba(0, 255, 163, 0.1);">
+       <div class="h-48 flex items-center justify-center" style="background: linear-gradient(135deg, #1a1a2e 0%, #2d1b4e 100%);">
+        <div class="text-6xl">
+         🤖
+        </div>
+       </div>
+       <div class="p-6">
+        <div class="flex items-center gap-2 mb-3"><span class="px-2 py-1 rounded text-xs font-mono-code" style="background: rgba(0, 255, 163, 0.1); color: #00ffa3;">AI/ML</span>
+        </div>
+        <h3 class="font-mono-code text-xl font-semibold mb-2" style="color: #f0f0f5;">CodeMentor AI</h3>
+        <p class="text-sm mb-4" style="color: #a0a0b0;">An AI-powered code review assistant that provides intelligent suggestions, detects bugs, and helps maintain code quality.</p>
+        <div class="flex flex-wrap gap-2 mb-4"><span class="px-2 py-1 rounded text-xs" style="background: #1a1a2e; color: #a0a0b0;">Python</span> <span class="px-2 py-1 rounded text-xs" style="background: #1a1a2e; color: #a0a0b0;">FastAPI</span> <span class="px-2 py-1 rounded text-xs" style="background: #1a1a2e; color: #a0a0b0;">OpenAI</span> <span class="px-2 py-1 rounded text-xs" style="background: #1a1a2e; color: #a0a0b0;">Redis</span>
+        </div>
+        <div class="flex gap-4"><a href="#" class="flex items-center gap-2 text-sm transition-colors hover:opacity-80" style="color: #00ffa3;">
+          <svg class="w-4 h-4" fill="currentColor" viewbox="0 0 24 24">
+           <path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z" />
+          </svg> Code </a> <a href="#" class="flex items-center gap-2 text-sm transition-colors hover:opacity-80" style="color: #82aaff;">
+          <svg class="w-4 h-4" fill="none" stroke="currentColor" viewbox="0 0 24 24">
+           <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14" />
+          </svg> Demo </a>
+        </div>
+       </div>
+      </div><!-- Project 3 -->
+      <div class="fade-in card-hover rounded-xl overflow-hidden" style="background: #12121a; border: 1px solid rgba(0, 255, 163, 0.1);">
+       <div class="h-48 flex items-center justify-center" style="background: linear-gradient(135deg, #1a2e1a 0%, #1e3a1e 100%);">
+        <div class="text-6xl">
+         📊
+        </div>
+       </div>
+       <div class="p-6">
+        <div class="flex items-center gap-2 mb-3"><span class="px-2 py-1 rounded text-xs font-mono-code" style="background: rgba(0, 255, 163, 0.1); color: #00ffa3;">Dashboard</span>
+        </div>
+        <h3 class="font-mono-code text-xl font-semibold mb-2" style="color: #f0f0f5;">Analytics Hub</h3>
+        <p class="text-sm mb-4" style="color: #a0a0b0;">A comprehensive analytics dashboard with real-time data visualization, custom reporting, and predictive insights.</p>
+        <div class="flex flex-wrap gap-2 mb-4"><span class="px-2 py-1 rounded text-xs" style="background: #1a1a2e; color: #a0a0b0;">Next.js</span> <span class="px-2 py-1 rounded text-xs" style="background: #1a1a2e; color: #a0a0b0;">D3.js</span> <span class="px-2 py-1 rounded text-xs" style="background: #1a1a2e; color: #a0a0b0;">GraphQL</span> <span class="px-2 py-1 rounded text-xs" style="background: #1a1a2e; color: #a0a0b0;">PostgreSQL</span>
+        </div>
+        <div class="flex gap-4"><a href="#" class="flex items-center gap-2 text-sm transition-colors hover:opacity-80" style="color: #00ffa3;">
+          <svg class="w-4 h-4" fill="currentColor" viewbox="0 0 24 24">
+           <path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z" />
+          </svg> Code </a> <a href="#" class="flex items-center gap-2 text-sm transition-colors hover:opacity-80" style="color: #82aaff;">
+          <svg class="w-4 h-4" fill="none" stroke="currentColor" viewbox="0 0 24 24">
+           <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14" />
+          </svg> Demo </a>
+        </div>
+       </div>
+      </div><!-- Project 4 -->
+      <div class="fade-in card-hover rounded-xl overflow-hidden" style="background: #12121a; border: 1px solid rgba(0, 255, 163, 0.1);">
+       <div class="h-48 flex items-center justify-center" style="background: linear-gradient(135deg, #2e1a1a 0%, #3a1e1e 100%);">
+        <div class="text-6xl">
+         🎮
+        </div>
+       </div>
+       <div class="p-6">
+        <div class="flex items-center gap-2 mb-3"><span class="px-2 py-1 rounded text-xs font-mono-code" style="background: rgba(255, 95, 87, 0.1); color: #ff5f57;">Game Dev</span>
+        </div>
+        <h3 class="font-mono-code text-xl font-semibold mb-2" style="color: #f0f0f5;">Pixel Quest</h3>
+        <p class="text-sm mb-4" style="color: #a0a0b0;">A retro-style browser game with multiplayer capabilities, custom level editor, and global leaderboards.</p>
+        <div class="flex flex-wrap gap-2 mb-4"><span class="px-2 py-1 rounded text-xs" style="background: #1a1a2e; color: #a0a0b0;">Phaser.js</span> <span class="px-2 py-1 rounded text-xs" style="background: #1a1a2e; color: #a0a0b0;">TypeScript</span> <span class="px-2 py-1 rounded text-xs" style="background: #1a1a2e; color: #a0a0b0;">WebSocket</span> <span class="px-2 py-1 rounded text-xs" style="background: #1a1a2e; color: #a0a0b0;">Firebase</span>
+        </div>
+        <div class="flex gap-4"><a href="#" class="flex items-center gap-2 text-sm transition-colors hover:opacity-80" style="color: #00ffa3;">
+          <svg class="w-4 h-4" fill="currentColor" viewbox="0 0 24 24">
+           <path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z" />
+          </svg> Code </a> <a href="#" class="flex items-center gap-2 text-sm transition-colors hover:opacity-80" style="color: #82aaff;">
+          <svg class="w-4 h-4" fill="none" stroke="currentColor" viewbox="0 0 24 24">
+           <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14" />
+          </svg> Play </a>
+        </div>
+       </div>
+      </div>
+     </div>
+    </div>
+   </section><!-- Experience Timeline -->
+   <section id="experience" class="py-24 px-6">
+    <div class="max-w-4xl mx-auto">
+     <div class="text-center mb-16 fade-in">
+      <p class="font-mono-code text-sm mb-2" style="color: #00ffa3;">// Career Path</p>
+      <h2 class="font-mono-code text-3xl md:text-4xl font-bold" style="color: #f0f0f5;">Experience</h2>
+     </div>
+     <div class="relative"><!-- Timeline Line -->
+      <div class="absolute left-0 md:left-1/2 transform md:-translate-x-1/2 w-1 h-full timeline-line rounded-full"></div><!-- Experience Items -->
+      <div class="space-y-12"><!-- Item 1 -->
+       <div class="fade-in relative flex flex-col md:flex-row gap-8 md:gap-0">
+        <div class="md:w-1/2 md:pr-12 md:text-right">
+         <div class="p-6 rounded-xl card-hover" style="background: #12121a; border: 1px solid rgba(0, 255, 163, 0.1);"><span class="font-mono-code text-sm" style="color: #00ffa3;">2022 - Present</span>
+          <h3 class="font-mono-code text-xl font-semibold mt-2" style="color: #f0f0f5;">Senior Full Stack Developer</h3>
+          <p class="text-sm mt-1 mb-3" style="color: #82aaff;">TechCorp Inc.</p>
+          <p class="text-sm" style="color: #a0a0b0;">Leading development of microservices architecture, mentoring junior developers, and implementing CI/CD pipelines.</p>
+         </div>
+        </div>
+        <div class="absolute left-0 md:left-1/2 transform -translate-x-1/2 w-4 h-4 rounded-full" style="background: #00ffa3; top: 24px;"></div>
+        <div class="md:w-1/2 md:pl-12"></div>
+       </div><!-- Item 2 -->
+       <div class="fade-in relative flex flex-col md:flex-row gap-8 md:gap-0">
+        <div class="md:w-1/2 md:pr-12"></div>
+        <div class="absolute left-0 md:left-1/2 transform -translate-x-1/2 w-4 h-4 rounded-full" style="background: #00ffa3; top: 24px;"></div>
+        <div class="md:w-1/2 md:pl-12">
+         <div class="p-6 rounded-xl card-hover" style="background: #12121a; border: 1px solid rgba(0, 255, 163, 0.1);"><span class="font-mono-code text-sm" style="color: #00ffa3;">2020 - 2022</span>
+          <h3 class="font-mono-code text-xl font-semibold mt-2" style="color: #f0f0f5;">Full Stack Developer</h3>
+          <p class="text-sm mt-1 mb-3" style="color: #82aaff;">StartupXYZ</p>
+          <p class="text-sm" style="color: #a0a0b0;">Built and scaled the main product from 0 to 100k users. Implemented real-time features and optimized database performance.</p>
+         </div>
+        </div>
+       </div><!-- Item 3 -->
+       <div class="fade-in relative flex flex-col md:flex-row gap-8 md:gap-0">
+        <div class="md:w-1/2 md:pr-12 md:text-right">
+         <div class="p-6 rounded-xl card-hover" style="background: #12121a; border: 1px solid rgba(0, 255, 163, 0.1);"><span class="font-mono-code text-sm" style="color: #00ffa3;">2018 - 2020</span>
+          <h3 class="font-mono-code text-xl font-semibold mt-2" style="color: #f0f0f5;">Frontend Developer</h3>
+          <p class="text-sm mt-1 mb-3" style="color: #82aaff;">Digital Agency Co.</p>
+          <p class="text-sm" style="color: #a0a0b0;">Developed responsive web applications for diverse clients. Specialized in React and Vue.js frameworks.</p>
+         </div>
+        </div>
+        <div class="absolute left-0 md:left-1/2 transform -translate-x-1/2 w-4 h-4 rounded-full" style="background: #00ffa3; top: 24px;"></div>
+        <div class="md:w-1/2 md:pl-12"></div>
+       </div>
+      </div>
+     </div>
+    </div>
+   </section><!-- Contact Section -->
+   <section id="contact" class="py-24 px-6" style="background: linear-gradient(180deg, #0a0a0f 0%, #0f0f18 100%);">
+    <div class="max-w-4xl mx-auto">
+     <div class="text-center mb-16 fade-in">
+      <p class="font-mono-code text-sm mb-2" style="color: #00ffa3;">// Let's Connect</p>
+      <h2 id="contact-title" class="font-mono-code text-3xl md:text-4xl font-bold" style="color: #f0f0f5;">Get In Touch</h2>
+      <p id="contact-subtitle" class="mt-4" style="color: #a0a0b0;">Have a project in mind? Let's build something amazing together.</p>
+     </div>
+     <div class="grid md:grid-cols-2 gap-12"><!-- Contact Info -->
+      <div class="fade-in space-y-6">
+       <div class="flex items-center gap-4 p-4 rounded-lg" style="background: #12121a; border: 1px solid rgba(0, 255, 163, 0.1);">
+        <div class="w-12 h-12 rounded-lg flex items-center justify-center" style="background: rgba(0, 255, 163, 0.1);">
+         <svg class="w-6 h-6" fill="#00ffa3" viewbox="0 0 24 24">
+          <path d="M20 4H4c-1.1 0-1.99.9-1.99 2L2 18c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 4l-8 5-8-5V6l8 5 8-5v2z" />
+         </svg>
+        </div>
+        <div>
+         <p class="text-sm" style="color: #a0a0b0;">Email</p>
+         <p class="font-mono-code" style="color: #f0f0f5;">alex@developer.io</p>
+        </div>
+       </div>
+       <div class="flex items-center gap-4 p-4 rounded-lg" style="background: #12121a; border: 1px solid rgba(0, 255, 163, 0.1);">
+        <div class="w-12 h-12 rounded-lg flex items-center justify-center" style="background: rgba(0, 255, 163, 0.1);">
+         <svg class="w-6 h-6" fill="#00ffa3" viewbox="0 0 24 24">
+          <path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z" />
+         </svg>
+        </div>
+        <div>
+         <p class="text-sm" style="color: #a0a0b0;">Location</p>
+         <p class="font-mono-code" style="color: #f0f0f5;">San Francisco, CA</p>
+        </div>
+       </div>
+       <div class="flex gap-4 mt-8"><a href="https://github.com" target="_blank" rel="noopener noreferrer" class="w-12 h-12 rounded-lg flex items-center justify-center transition-all hover:scale-110" style="background: #12121a; border: 1px solid rgba(0, 255, 163, 0.1);">
+         <svg class="w-6 h-6" fill="#a0a0b0" viewbox="0 0 24 24">
+          <path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z" />
+         </svg></a> <a href="https://linkedin.com" target="_blank" rel="noopener noreferrer" class="w-12 h-12 rounded-lg flex items-center justify-center transition-all hover:scale-110" style="background: #12121a; border: 1px solid rgba(0, 255, 163, 0.1);">
+         <svg class="w-6 h-6" fill="#a0a0b0" viewbox="0 0 24 24">
+          <path d="M19 0h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.762 0 5-2.239 5-5v-14c0-2.761-2.238-5-5-5zm-11 19h-3v-11h3v11zm-1.5-12.268c-.966 0-1.75-.79-1.75-1.764s.784-1.764 1.75-1.764 1.75.79 1.75 1.764-.783 1.764-1.75 1.764zm13.5 12.268h-3v-5.604c0-3.368-4-3.113-4 0v5.604h-3v-11h3v1.765c1.396-2.586 7-2.777 7 2.476v6.759z" />
+         </svg></a> <a href="https://twitter.com" target="_blank" rel="noopener noreferrer" class="w-12 h-12 rounded-lg flex items-center justify-center transition-all hover:scale-110" style="background: #12121a; border: 1px solid rgba(0, 255, 163, 0.1);">
+         <svg class="w-6 h-6" fill="#a0a0b0" viewbox="0 0 24 24">
+          <path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z" />
+         </svg></a>
+       </div>
+      </div><!-- Contact Form -->
+      <div class="fade-in">
+       <form id="contactForm" class="space-y-4">
+        <div><label for="name" class="block text-sm mb-2" style="color: #a0a0b0;">Name</label> <input type="text" id="name" name="name" required class="w-full px-4 py-3 rounded-lg font-mono-code text-sm focus:outline-none focus:ring-2 transition-all" style="background: #12121a; border: 1px solid rgba(0, 255, 163, 0.2); color: #f0f0f5;" placeholder="Your name">
+        </div>
+        <div><label for="email" class="block text-sm mb-2" style="color: #a0a0b0;">Email</label> <input type="email" id="email" name="email" required class="w-full px-4 py-3 rounded-lg font-mono-code text-sm focus:outline-none focus:ring-2 transition-all" style="background: #12121a; border: 1px solid rgba(0, 255, 163, 0.2); color: #f0f0f5;" placeholder="your@email.com">
+        </div>
+        <div><label for="message" class="block text-sm mb-2" style="color: #a0a0b0;">Message</label> <textarea id="message" name="message" rows="4" required class="w-full px-4 py-3 rounded-lg font-mono-code text-sm focus:outline-none focus:ring-2 transition-all resize-none" style="background: #12121a; border: 1px solid rgba(0, 255, 163, 0.2); color: #f0f0f5;" placeholder="Tell me about your project..."></textarea>
+        </div><button type="submit" id="submitBtn" class="w-full py-3 rounded-lg font-medium transition-all hover:scale-105 flex items-center justify-center gap-2" style="background: #00ffa3; color: #0a0a0f;"> <span>Send Message</span>
+         <svg class="w-5 h-5" fill="none" stroke="currentColor" viewbox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3" />
+         </svg></button>
+        <p id="formMessage" class="text-center text-sm mt-4 hidden"></p>
+       </form>
+      </div>
+     </div>
+    </div>
+   </section><!-- Footer -->
+   <footer class="py-8 px-6" style="border-top: 1px solid rgba(0, 255, 163, 0.1);">
+    <div class="max-w-6xl mx-auto flex flex-col md:flex-row justify-between items-center gap-4">
+     <p class="font-mono-code text-sm" style="color: #a0a0b0;">&lt;/&gt; Built with ☕ and 💚</p>
+     <p class="text-sm" style="color: #a0a0b0;">© 2024 Alex Chen. All rights reserved.</p>
+    </div>
+   </footer>
+  </div>
+  <script>
+    const defaultConfig = {
+      developer_name: "Alex Chen",
+      developer_title: "Full Stack Developer",
+      bio_text: "Crafting elegant solutions with clean code. Passionate about building performant web applications and exploring new technologies. I turn complex problems into simple, beautiful interfaces.",
+      projects_heading: "Featured Projects",
+      contact_heading: "Get In Touch",
+      contact_subtext: "Have a project in mind? Let's build something amazing together.",
+      background_color: "#0a0a0f",
+      card_color: "#12121a",
+      text_color: "#f0f0f5",
+      accent_color: "#00ffa3",
+      secondary_text_color: "#a0a0b0"
+    };
+
+    let config = { ...defaultConfig };
+
+    // Intersection Observer for fade-in animations
+    const observerOptions = {
+      threshold: 0.1,
+      rootMargin: "0px 0px -50px 0px"
+    };
+
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add("visible");
+        }
+      });
+    }, observerOptions);
+
+    document.querySelectorAll(".fade-in").forEach(el => observer.observe(el));
+
+    // Smooth scroll for navigation links
+    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+      anchor.addEventListener("click", function(e) {
+        e.preventDefault();
+        const target = document.querySelector(this.getAttribute("href"));
+        if (target) {
+          target.scrollIntoView({ behavior: "smooth", block: "start" });
+        }
+      });
+    });
+
+    // Contact form handling
+    const contactForm = document.getElementById("contactForm");
+    const formMessage = document.getElementById("formMessage");
+    const submitBtn = document.getElementById("submitBtn");
+
+    contactForm.addEventListener("submit", function(e) {
+      e.preventDefault();
+      
+      submitBtn.disabled = true;
+      submitBtn.innerHTML = '<span>Sending...</span>';
+      
+      setTimeout(() => {
+        formMessage.textContent = "✓ Message sent successfully! I'll get back to you soon.";
+        formMessage.style.color = "#00ffa3";
+        formMessage.classList.remove("hidden");
+        
+        submitBtn.disabled = false;
+        submitBtn.innerHTML = '<span>Send Message</span><svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3"/></svg>';
+        
+        contactForm.reset();
+        
+        setTimeout(() => {
+          formMessage.classList.add("hidden");
+        }, 5000);
+      }, 1500);
+    });
+
+    // Input focus effects
+    const inputs = document.querySelectorAll("input, textarea");
+    inputs.forEach(input => {
+      input.addEventListener("focus", function() {
+        this.style.borderColor = "#00ffa3";
+        this.style.boxShadow = "0 0 0 3px rgba(0, 255, 163, 0.1)";
+      });
+      input.addEventListener("blur", function() {
+        this.style.borderColor = "rgba(0, 255, 163, 0.2)";
+        this.style.boxShadow = "none";
+      });
+    });
+
+    // Element SDK initialization
+    async function onConfigChange(cfg) {
+      document.getElementById("hero-name").textContent = cfg.developer_name || defaultConfig.developer_name;
+      document.getElementById("hero-title").textContent = cfg.developer_title || defaultConfig.developer_title;
+      document.getElementById("hero-bio").textContent = cfg.bio_text || defaultConfig.bio_text;
+      document.getElementById("projects-title").textContent = cfg.projects_heading || defaultConfig.projects_heading;
+      document.getElementById("contact-title").textContent = cfg.contact_heading || defaultConfig.contact_heading;
+      document.getElementById("contact-subtitle").textContent = cfg.contact_subtext || defaultConfig.contact_subtext;
+
+      // Apply colors
+      const bgColor = cfg.background_color || defaultConfig.background_color;
+      const cardColor = cfg.card_color || defaultConfig.card_color;
+      const textColor = cfg.text_color || defaultConfig.text_color;
+      const accentColor = cfg.accent_color || defaultConfig.accent_color;
+      const secondaryTextColor = cfg.secondary_text_color || defaultConfig.secondary_text_color;
+
+      document.getElementById("app-wrapper").style.background = bgColor;
+      
+      document.querySelectorAll('[style*="color: #f0f0f5"]').forEach(el => {
+        el.style.color = textColor;
+      });
+      
+      document.querySelectorAll('[style*="color: #00ffa3"]').forEach(el => {
+        el.style.color = accentColor;
+      });
+      
+      document.querySelectorAll('[style*="color: #a0a0b0"]').forEach(el => {
+        el.style.color = secondaryTextColor;
+      });
+    }
+
+    function mapToCapabilities(cfg) {
+      return {
+        recolorables: [
+          {
+            get: () => cfg.background_color || defaultConfig.background_color,
+            set: (value) => { cfg.background_color = value; window.elementSdk.setConfig({ background_color: value }); }
+          },
+          {
+            get: () => cfg.card_color || defaultConfig.card_color,
+            set: (value) => { cfg.card_color = value; window.elementSdk.setConfig({ card_color: value }); }
+          },
+          {
+            get: () => cfg.text_color || defaultConfig.text_color,
+            set: (value) => { cfg.text_color = value; window.elementSdk.setConfig({ text_color: value }); }
+          },
+          {
+            get: () => cfg.accent_color || defaultConfig.accent_color,
+            set: (value) => { cfg.accent_color = value; window.elementSdk.setConfig({ accent_color: value }); }
+          },
+          {
+            get: () => cfg.secondary_text_color || defaultConfig.secondary_text_color,
+            set: (value) => { cfg.secondary_text_color = value; window.elementSdk.setConfig({ secondary_text_color: value }); }
+          }
+        ],
+        borderables: [],
+        fontEditable: undefined,
+        fontSizeable: undefined
+      };
+    }
+
+    function mapToEditPanelValues(cfg) {
+      return new Map([
+        ["developer_name", cfg.developer_name || defaultConfig.developer_name],
+        ["developer_title", cfg.developer_title || defaultConfig.developer_title],
+        ["bio_text", cfg.bio_text || defaultConfig.bio_text],
+        ["projects_heading", cfg.projects_heading || defaultConfig.projects_heading],
+        ["contact_heading", cfg.contact_heading || defaultConfig.contact_heading],
+        ["contact_subtext", cfg.contact_subtext || defaultConfig.contact_subtext]
+      ]);
+    }
+
+    if (window.elementSdk) {
+      window.elementSdk.init({
+        defaultConfig,
+        onConfigChange,
+        mapToCapabilities,
+        mapToEditPanelValues
+      });
+    }
+  </script>
+ <script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'9c77c14e8227d8a3',t:'MTc3MDAxNTAzNS4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script></body>
+</html>
